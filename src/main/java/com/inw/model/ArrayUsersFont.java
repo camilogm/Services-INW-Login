@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 @Qualifier("ArrayUsersFont")
 public class ArrayUsersFont implements GetUser {
 
-	
+	private String[] rols = {"ADMIN", "CLIENTE"};
 	private String[] usersName = {"gmcamilo" , "luiszapato" };
 	private String[] names = { "Cam","Lu"};
 	private String[] lastNames= {"Gon", "God"};
@@ -21,7 +21,7 @@ public class ArrayUsersFont implements GetUser {
 			
 			if (userName.equals(email[i])) {
 				return new User(usersName[i],email[i],password[i]
-						, names[i],lastNames[i]
+						, names[i],lastNames[i], rols[i]
 						);
 			}			
 		}

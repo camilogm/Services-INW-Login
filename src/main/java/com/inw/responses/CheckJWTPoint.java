@@ -24,6 +24,7 @@ public class CheckJWTPoint {
 	public ResponseEntity<?> execute(){ 
 		
 		final User user = userDetails.getUser();
+		user.setPassword(null);
 		final CheckInJWT response = new CheckInJWT(true,user);
 		
 		return new ResponseEntity<>(response,HttpStatus.OK);
