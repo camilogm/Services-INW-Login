@@ -1,4 +1,4 @@
-package com.inw.requests;
+package com.inw.DTO;
 
 import java.io.Serializable;
 

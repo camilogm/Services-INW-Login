@@ -36,6 +36,8 @@ public class UserDetailsAuthentication implements UserDetails,  CredentialsConta
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
+		
+		setUser();
 		ArrayList<SimpleGrantedAuthority> list=new ArrayList<>();
 		list.add(new SimpleGrantedAuthority("ADMIN"));
 		return list;
@@ -50,7 +52,7 @@ public class UserDetailsAuthentication implements UserDetails,  CredentialsConta
 
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
+		setUser();
 		return this.userName;
 	}
 

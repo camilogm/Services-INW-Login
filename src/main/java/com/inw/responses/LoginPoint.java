@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.inw.requests.LoginModel;
-import com.inw.requests.LoginDTO;
 import com.inw.util.*;
 import com.inw.services.MyUserDetailsService;
+import com.inw.DTO.LoginDTO;
 import com.inw.model.User;
 
 @RestController
