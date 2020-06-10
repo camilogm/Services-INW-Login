@@ -23,7 +23,8 @@ import com.inw.services.MyUserDetailsService;
 import com.inw.util.JwtUtil;
 import com.inw.util.UserDetailsAuthentication;
 
-import io.jsonwebtoken.MalformedJwtException;;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureException;;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
@@ -50,7 +51,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	        	return;
 	        }
      	
-		 
 	        String userName = null;
 	        String jwt = null;
 
@@ -83,7 +83,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	 	        }
 	        	
 	        	
-	        }catch (MalformedJwtException ex) {
+	        }catch (MalformedJwtException | SignatureException ex) {
 	               	
 	        }      
 	        
