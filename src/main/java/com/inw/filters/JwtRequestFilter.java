@@ -43,6 +43,14 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 		 
 		 final String authorizationHeader = request.getHeader("Authorization");
 
+		 
+		 	//allows the to don't authenticate
+		 	if (request.getRequestURI().equals("/login")) {
+	        	chain.doFilter(request, response);
+	        	return;
+	        }
+     	
+		 
 	        String userName = null;
 	        String jwt = null;
 
@@ -52,14 +60,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 		    
 		        	jwt = authorizationHeader.substring(7);
 		            userName = jwtUtil.extractUsername(jwt);
-		        }   
-	        	 if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
+		        } 
+	
+	        	if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+	
 	 	        	
 	 	        	UserDetailsAuthentication userDetails = (UserDetailsAuthentication) this.userDetailsService.loadUserByUsername(userName);
-
+	
 	 	            if (jwtUtil.validateToken(jwt, userDetails)) {
-
+	
 	 	                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
 	 	                		jwtUtil.getAuthentication( authorizationHeader ,userDetails);
 	 	                
@@ -77,6 +86,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	        }catch (MalformedJwtException ex) {
 	               	
 	        }      
+	        
+	        //if something is band, do this method an reset the return a error handle resposne
 	    	this.resetResponse(response);
         	return;	 
 	        	 

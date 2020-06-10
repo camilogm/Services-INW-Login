@@ -22,6 +22,6 @@ public class BadCredentialsHandle  {
 		
 		HttpStatus status=HttpStatus.BAD_REQUEST;
     	error.setError(status.value(), "Usuario o contraseña incorrectos");
-        return new ResponseEntity<>(error,HttpStatus.BAD_REQUEST);	
+        return new ResponseEntity<>(error.getMessage(),HttpStatus.BAD_REQUEST);	
 	}
 }

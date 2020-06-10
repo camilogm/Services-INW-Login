@@ -29,14 +29,20 @@ public class LoginPoint {
 	private MyUserDetailsService userDetailsService;
 	
 	@Autowired
+	private UserDetailsAuthentication userDetails;
+	
+	@Autowired
 	private JwtUtil jwtUtil;
 	
 	@RequestMapping(value="/login",method = RequestMethod.POST, headers="Accept=application/json")
 	public ResponseEntity<LoginDTO> login( @Valid @RequestBody LoginModel authenticationRequest){
 				
+		userDetails.resetUser();
 		authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getPassword())
 				);		
+		
+		
 		final UserDetailsAuthentication userDetails=(UserDetailsAuthentication) userDetailsService.loadUserByUsername(authenticationRequest.getEmail());
 		final User user = userDetails.getUser();
 		user.setPassword(null);

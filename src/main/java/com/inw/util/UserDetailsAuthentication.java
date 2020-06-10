@@ -94,6 +94,12 @@ public class UserDetailsAuthentication implements UserDetails,  CredentialsConta
 			user=this.getUser.execute(this.userName);
 		}
 	}
+	public void resetUser() {
+		
+		this.user = null;
+	}
+	
+	
 	public User getUser() {
 		return this.user;
 	}
