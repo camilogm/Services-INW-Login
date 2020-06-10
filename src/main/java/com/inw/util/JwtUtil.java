@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 @Service
@@ -68,14 +69,14 @@ public class JwtUtil {
 	        
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails) {
+    public Boolean validateToken(String token, UserDetails userDetails) throws MalformedJwtException {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
     
 
 	public  UsernamePasswordAuthenticationToken getAuthentication(String token,
-			final UserDetails userDetails) {
+			final UserDetails userDetails)  throws MalformedJwtException  {
 		
 		
 		if (token.startsWith("Bearer ")) { 

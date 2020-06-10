@@ -15,9 +15,15 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+
+import com.inw.responses.exceptions.Error;
+import com.inw.serializable.GetStringfy;
+import com.inw.serializable.GetStringfyFromGson;
 import com.inw.services.MyUserDetailsService;
 import com.inw.util.JwtUtil;
-import com.inw.util.UserDetailsAuthentication;;
+import com.inw.util.UserDetailsAuthentication;
+
+import io.jsonwebtoken.MalformedJwtException;;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
@@ -27,6 +33,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
 	   	@Autowired
 	    private JwtUtil jwtUtil;
+	   	
+	   	@Autowired
+	   	private Error error;
 	
 	   	@Override
 	    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
@@ -37,35 +46,55 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	        String userName = null;
 	        String jwt = null;
 
-	        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-	    
-	        	jwt = authorizationHeader.substring(7);
-	            userName = jwtUtil.extractUsername(jwt);
-	        } else {
-	        	response.reset();
-	        	response.setStatus(HttpStatus.BAD_REQUEST.value());
-	        	response.getWriter().flush();
-	        	return;
+	        try {
+		       
+	        	if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+		    
+		        	jwt = authorizationHeader.substring(7);
+		            userName = jwtUtil.extractUsername(jwt);
+		        }   
+	        	 if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+
+	 	        	
+	 	        	UserDetailsAuthentication userDetails = (UserDetailsAuthentication) this.userDetailsService.loadUserByUsername(userName);
+
+	 	            if (jwtUtil.validateToken(jwt, userDetails)) {
+
+	 	                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+	 	                		jwtUtil.getAuthentication( authorizationHeader ,userDetails);
+	 	                
+	 	                usernamePasswordAuthenticationToken
+	 	                        .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+	 	                
+	 	                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+	 	                
+	 	               chain.doFilter(request, response);
+	 	               return;
+	 	            }
+	 	        }
 	        	
-	        }
-
-	        if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
 	        	
-	        	UserDetailsAuthentication userDetails = (UserDetailsAuthentication) this.userDetailsService.loadUserByUsername(userName);
-
-	            if (jwtUtil.validateToken(jwt, userDetails)) {
-
-	                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-	                		jwtUtil.getAuthentication( authorizationHeader ,userDetails);
-	                
-	                usernamePasswordAuthenticationToken
-	                        .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-	                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-	            }
-	        }
-	        chain.doFilter(request, response);
+	        }catch (MalformedJwtException ex) {
+	               	
+	        }      
+	    	this.resetResponse(response);
+        	return;	 
+	        	 
+	 }
+	   	
+	 private HttpServletResponse resetResponse(HttpServletResponse response) throws IOException {
 		 
+		error.setError(HttpStatus.BAD_REQUEST.value(), "NotAllowed");
+     	GetStringfy convert = new GetStringfyFromGson(); 
+     	
+     	response.reset();
+     	response.setStatus(HttpStatus.BAD_REQUEST.value());
+     	response.setContentType("application/json");
+     	response.getWriter().write(convert.execute(error, Error.class));
+     	response.getWriter().flush();
+     	response.getWriter().close();
+     	
+     	return response;
 	 }
 	
 	
