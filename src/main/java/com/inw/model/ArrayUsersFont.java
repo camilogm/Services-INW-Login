@@ -20,7 +20,7 @@ public class ArrayUsersFont implements GetUser {
 		for (int i=0;i<usersName.length;i++) {
 			
 			if (userName.equals(email[i])) {
-				return new User(usersName[i],email[i],password[i]
+				return new User(email[i],password[i]
 						, names[i],lastNames[i], rols[i]
 						);
 			}			

@@ -15,7 +15,6 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-
 import com.inw.responses.exceptions.Error;
 import com.inw.serializable.GetStringfy;
 import com.inw.serializable.GetStringfyFromGson;
@@ -37,13 +36,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	   	
 	   	@Autowired
 	   	private Error error;
-	
+	   	
 	   	@Override
 	    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 	            throws ServletException, IOException {
-		 
+	   		
 		 final String authorizationHeader = request.getHeader("Authorization");
-
 		 
 		 	//allows the to don't authenticate
 		 	if (request.getRequestURI().equals("/login")) {
@@ -108,5 +106,5 @@ public class JwtRequestFilter extends OncePerRequestFilter {
      	return response;
 	 }
 	
-	
+	 
 }

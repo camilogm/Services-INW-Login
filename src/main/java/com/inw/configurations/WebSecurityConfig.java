@@ -1,4 +1,4 @@
-package com.inw.security;
+package com.inw.configurations;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +20,7 @@ import com.inw.filters.JwtRequestFilter;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class ConfigurationSpringSecurity extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private UserDetailsService userDetailsService;
