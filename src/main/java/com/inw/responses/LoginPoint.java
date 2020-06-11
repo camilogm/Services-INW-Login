@@ -16,6 +16,7 @@ import com.inw.requests.LoginModel;
 import com.inw.util.*;
 import com.inw.services.MyUserDetailsService;
 import com.inw.DTO.LoginDTO;
+import com.inw.DTO.Response;
 import com.inw.model.User;
 
 @RestController
@@ -35,7 +36,7 @@ public class LoginPoint {
 	private JwtUtil jwtUtil;
 	
 	@RequestMapping(value="/login",method = RequestMethod.POST, headers="Accept=application/json")
-	public ResponseEntity<LoginDTO> login( @Valid @RequestBody LoginModel authenticationRequest){
+	public ResponseEntity<?> login( @Valid @RequestBody LoginModel authenticationRequest){
 				
 		userDetails.resetUser();
 		authenticationManager.authenticate(
@@ -47,7 +48,10 @@ public class LoginPoint {
 		final User user = userDetails.getUser();
 		user.setPassword(null);
 		final String jwt = jwtUtil.generateToken(userDetails);
-		return ResponseEntity.ok(new LoginDTO(jwt,user.getRol(),user.getName(),user.getLastName()));	
+		LoginDTO login = new LoginDTO(jwt,user.getRol(),user.getName(),user.getLastName());		
+		return ResponseEntity.ok(
+				Response.ok(login)
+				);	
 		
 	}
 		

@@ -2,7 +2,7 @@ package com.inw.model;
 
 public class User {
 
-	
+	private Integer id;
 	private String email;
 	private String password;
 	private String name;
@@ -14,8 +14,9 @@ public class User {
 		
 	}
 
-	public User(String email, String password, String name, String lastName, String rol) {
+	public User(Integer id,String email, String password, String name, String lastName, String rol) {
 		
+		this.id = id;
 		this.email = email;
 		this.password = password;
 		this.name = name;
@@ -23,16 +24,26 @@ public class User {
 		this.rol = rol;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public String getEmail() {
 		return email;
-	}
-	public String getPassword() {
-		return password;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public String getPassword() {
+		return password;
+	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -41,12 +52,12 @@ public class User {
 		return name;
 	}
 
-	public String getLastName() {
-		return lastName;
-	}
-
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getLastName() {
+		return lastName;
 	}
 
 	public void setLastName(String lastName) {
@@ -60,5 +71,7 @@ public class User {
 	public void setRol(String rol) {
 		this.rol = rol;
 	}
+
+	
 	
 }

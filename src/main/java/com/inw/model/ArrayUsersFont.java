@@ -13,6 +13,7 @@ public class ArrayUsersFont implements GetUser {
 	private String[] lastNames= {"Gon", "God"};
 	private String[] password  = {"12345678" , "pppp1111" };
 	private String[] email = {"camilo@gmail.com","luis@yahoo.com"}; 
+	private Integer[] IDs = {1,2};
 	
 	@Override
 	public User execute(String userName) {
@@ -20,7 +21,7 @@ public class ArrayUsersFont implements GetUser {
 		for (int i=0;i<usersName.length;i++) {
 			
 			if (userName.equals(email[i])) {
-				return new User(email[i],password[i]
+				return new User(IDs[i],email[i],password[i]
 						, names[i],lastNames[i], rols[i]
 						);
 			}			

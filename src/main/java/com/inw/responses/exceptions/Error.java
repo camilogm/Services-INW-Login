@@ -8,44 +8,51 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.FieldError;
 
+import com.inw.DTO.FieldErrorDTO;
+
 @Component
 @Qualifier("ErrorClass1")
 @Primary
 public class Error {
-    private int status;
-    private String message;
-    private List<FieldError> fieldErrors;
+    
+	private String message;
+    private List<FieldErrorDTO> fieldErrors;
 
     public Error() {
     	
     }
     
-    public Error(int status, String message) {
-        this.status = status;
+    public Error(String message, List<FieldError> fieldsError) {
         this.message = message;
-        this.fieldErrors=new ArrayList<>();
+        this.setFieldError(fieldsError);
     }
-
-    public int getStatus() {
-        return status;
+    
+    public void  setError(String message, List<FieldError> fieldsError) {
+        this.message = message;
+        this.setFieldError(fieldsError);
     }
-
+    
     public String getMessage() {
         return message;
     }
 
-    public void addFieldError(String objectName, String message) {
-        FieldError error = new FieldError(objectName, message, "");
-        fieldErrors.add(error);
-    }
-
-    public List<FieldError> getFieldErrors() {
+    public List<FieldErrorDTO> getFieldErrors() {
         return fieldErrors;
     }
+    public void setFieldError(List<FieldError> fieldsError) {
+       
+    	if (fieldsError!=null) { 
+    		this.fieldErrors = new ArrayList<>();
+	    	fieldsError.forEach(fieldError -> { 
+	    		
+	    		 String objectName = fieldError.getField();
+	    		 String message = fieldError.getDefaultMessage();
+	    		 FieldErrorDTO error = new FieldErrorDTO(objectName, message);
+	    	     fieldErrors.add(error);
+	    	});
+    	}
+    }
 
-	public void setError(int status, String message) {
-		 this.status = status;
-	     this.message = message;
-	     this.fieldErrors=new ArrayList<>();
-	}
+    
+
 }

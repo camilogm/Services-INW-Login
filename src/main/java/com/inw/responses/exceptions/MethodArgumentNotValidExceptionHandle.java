@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.List;
 
+import com.inw.DTO.Response;
+
 @RestControllerAdvice
 @Order(1)
 public class MethodArgumentNotValidExceptionHandle {
@@ -23,14 +25,17 @@ public class MethodArgumentNotValidExceptionHandle {
 	
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Error> execute(MethodArgumentNotValidException ex) {
+    public ResponseEntity<?> execute(MethodArgumentNotValidException ex) {
     	
      	HttpStatus status=HttpStatus.BAD_REQUEST;
     	BindingResult result = ex.getBindingResult();
         List<FieldError> fieldErrors = result.getFieldErrors();
-        error.setError(status.value(), "validation error");
-        ProcessErrors.processFieldErrors(error,fieldErrors);
-        return new ResponseEntity<>(error,status);
+        error.setError("Error al ingresar los datos " , fieldErrors);
+      
+        
+        return new ResponseEntity<>(
+        		Response.bad_request(error)
+        		,status);
     }
 
 }
