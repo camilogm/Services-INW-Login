@@ -29,7 +29,7 @@ public class Error {
     
     public void  setError(String message, List<FieldError> fieldsError) {
         this.message = message;
-        this.setFieldError(fieldsError);
+        this.fieldErrors = fieldsError == null ? null : this.setFieldError(fieldsError);
     }
     
     public String getMessage() {
@@ -39,18 +39,18 @@ public class Error {
     public List<FieldErrorDTO> getFieldErrors() {
         return fieldErrors;
     }
-    public void setFieldError(List<FieldError> fieldsError) {
+    private  List<FieldErrorDTO> setFieldError(List<FieldError> fieldsError) {
        
-    	if (fieldsError!=null) { 
-    		this.fieldErrors = new ArrayList<>();
-	    	fieldsError.forEach(fieldError -> { 
-	    		
-	    		 String objectName = fieldError.getField();
-	    		 String message = fieldError.getDefaultMessage();
-	    		 FieldErrorDTO error = new FieldErrorDTO(objectName, message);
-	    	     fieldErrors.add(error);
-	    	});
-    	}
+		List<FieldErrorDTO> fieldErrors = new ArrayList<>();
+    	fieldsError.forEach(fieldError -> { 
+    		
+    		 String objectName = fieldError.getField();
+    		 String message = fieldError.getDefaultMessage();
+    		 FieldErrorDTO error = new FieldErrorDTO(objectName, message);
+    	     fieldErrors.add(error);
+    	});
+    	return fieldErrors;
+	
     }
 
     
