@@ -93,11 +93,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	   	
 	 private HttpServletResponse resetResponse(HttpServletResponse response) throws IOException {
 		 
-		error.setError(HttpStatus.BAD_REQUEST.value(), "NotAllowed");
+		error.setError(HttpStatus.UNAUTHORIZED.value(), "Cannot authenticate your identity");
      	GetStringfy convert = new GetStringfyFromGson(); 
      	
      	response.reset();
-     	response.setStatus(HttpStatus.BAD_REQUEST.value());
+     	response.setStatus(HttpStatus.UNAUTHORIZED.value());
      	response.setContentType("application/json");
      	response.getWriter().write(convert.execute(error, Error.class));
      	response.getWriter().flush();
