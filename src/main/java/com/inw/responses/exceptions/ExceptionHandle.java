@@ -11,7 +11,6 @@ public class ExceptionHandle {
 	
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<?> execute(Exception ex){
-		
 		return new ResponseEntity<>(ex.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	

@@ -26,7 +26,7 @@ public class UserDetailsAuthentication implements UserDetails,  CredentialsConta
 	private String userName="";
 	private User user=null;
 	
-	@Qualifier("ArrayUsersFont")
+	@Qualifier("DatabaseUsersFont")
 	@Autowired
 	private GetUser getUser;
 	

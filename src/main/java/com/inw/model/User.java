@@ -1,14 +1,24 @@
 package com.inw.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import sv.hawkframework.com.ORM.Annotations.DataModelAnnotations;
+import sv.hawkframework.com.ORM.Annotations.PrimaryKey;
+
+@DataModelAnnotations(tableName = "J0120_user")
 public class User {
 
+	@PrimaryKey
 	private Integer id;
 	private String email;
 	private String password;
+	@SerializedName("first_name")
 	private String name;
+	@SerializedName("last_name")
 	private String lastName;
+	@SerializedName("rol_id")
+	private Integer rolId;
 	private String rol;
-	
 	
 	public User() {
 		
@@ -70,6 +80,14 @@ public class User {
 
 	public void setRol(String rol) {
 		this.rol = rol;
+	}
+
+	public Integer getRolId() {
+		return rolId;
+	}
+
+	public void setRolId(Integer rol_id) {
+		this.rolId = rol_id;
 	}
 
 	
