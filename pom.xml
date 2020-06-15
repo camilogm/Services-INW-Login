@@ -18,12 +18,13 @@
 		<java.version>1.8</java.version>
 	</properties>
 
-	<repositories>  
-	   <repository>
-	     <id>external</id>
-	     <name>ORM-CC</name>
-	     <url>file:///${project.basedir}/lib</url>
-	   </repository>
+	<repositories>
+	<!--other repositories if any -->
+		<repository>
+			<id>project.local</id>
+			<name>project</name>
+			<url>file:${project.basedir}/libs</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
