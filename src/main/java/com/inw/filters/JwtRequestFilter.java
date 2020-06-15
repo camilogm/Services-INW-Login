@@ -46,7 +46,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 		 final String authorizationHeader = request.getHeader("Authorization");
 		 
 		 	//allows the to don't authenticate
-		 	if (request.getRequestURI().equals("/login")) {
+		 	if (request.getRequestURI().equals("/login") || request.getRequestURI().equals("/prueba")) {
 	        	chain.doFilter(request, response);
 	        	return;
 	        }
