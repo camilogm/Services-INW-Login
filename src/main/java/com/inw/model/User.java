@@ -2,8 +2,9 @@ package com.inw.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import sv.hawkframework.com.ORM.Annotations.DataModelAnnotations;
-import sv.hawkframework.com.ORM.Annotations.PrimaryKey;
+import sv.hawklibrary.com.ORM.Annotations.DataModelAnnotations;
+import sv.hawklibrary.com.ORM.Annotations.PrimaryKey;
+
 
 @DataModelAnnotations(tableName = "J0120_user")
 public class User {
