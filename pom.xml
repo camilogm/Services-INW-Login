@@ -22,7 +22,7 @@
 	<!--other repositories if any -->
 		<repository>
 			<id>project.local</id>
-			<name>project</name>
+			<name>ORM-CC</name>
 			<url>file:${project.basedir}/libs</url>
 		</repository>
 	</repositories>
@@ -99,7 +99,7 @@
 
 		<dependency>
 		     <groupId>sv.hawklibrary.com</groupId>
-		     <artifactId>ORM</artifactId>
+		     <artifactId>ORM-0.0.1-SNAPSHOT</artifactId>
 		     <version>0.0.1-SNAPSHOT</version>
 		 </dependency>
 
