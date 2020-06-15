@@ -99,7 +99,7 @@
 
 		<dependency>
 		     <groupId>sv.hawklibrary.com</groupId>
-		     <artifactId>ORM-0.0.1-SNAPSHOT</artifactId>		     
+		     <artifactId>ORM-0.0.1-SNAPSHOT-0.0.1-SNAPSHOT</artifactId>		     
 		     <version>0.0.1-SNAPSHOT</version>
 		 </dependency>
 
