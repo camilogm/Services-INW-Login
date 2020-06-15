@@ -99,8 +99,9 @@
 
 		<dependency>
 		     <groupId>sv.hawklibrary.com</groupId>
-		     <artifactId>ORM-0.0.1-SNAPSHOT-0.0.1-SNAPSHOT</artifactId>		     
-		     <version>0.0.1-SNAPSHOT</version>
+		     <artifactId>ORM</artifactId>		     
+		     <version>jdk9</version>
+		     
 		 </dependency>
 
 
