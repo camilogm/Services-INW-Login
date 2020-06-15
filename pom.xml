@@ -21,9 +21,9 @@
 	<repositories>
 	<!--other repositories if any -->
 		<repository>
-			<id>ORMl</id>
+			<id>ORM</id>
 			<name>ORM-CC</name>
-			<url>file:${project.basedir}/libs</url>
+			<url>file:${project.basedir}/libs/ORM.jar</url>
 		</repository>
 	</repositories>
 
