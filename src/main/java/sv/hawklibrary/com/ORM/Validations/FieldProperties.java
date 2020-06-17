@@ -14,7 +14,7 @@ public class FieldProperties {
 		String fieldName1=fieldNameAnn==null ? 
 					tableName+"."+fieldName :
 						tableName+"."+fieldNameAnn.name();		      	
-		fieldName=PropertiesLoad.getProperty(fieldName1);
+		fieldName="No se puede duplicar "+fieldName;
 			
 		if (fieldName==null)
 				fieldName=field.getName();

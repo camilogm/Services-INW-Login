@@ -14,7 +14,6 @@ import sv.hawklibrary.com.ORM.TablesDataProperties;
 import sv.hawklibrary.com.ORM.QueryOperations.IConstructortSelect;
 import sv.hawklibrary.com.ORM.QueryOperations.IFind;
 import sv.hawklibrary.com.ORM.QueryOperations.IJsonConvert;
-import sv.hawklibrary.com.ORM.Validations.PropertiesLoad;
 import sv.hawklibrary.com.validators.NotFoundException;
 
 public class Find extends JsonConvert implements IFind {
@@ -77,7 +76,7 @@ public class Find extends JsonConvert implements IFind {
 		logger.info(query);
 		if (jsonObject==null){
 			String message;
-			message=PropertiesLoad.getProperty("NotFound");
+			message="No se encontró lo que buscaba";
 			NotFoundException ex=new NotFoundException(message+" "+TablesDataProperties.getTableName(object));
 			throw ex;
 		}

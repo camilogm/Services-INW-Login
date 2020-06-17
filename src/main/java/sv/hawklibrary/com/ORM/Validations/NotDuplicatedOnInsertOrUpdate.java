@@ -73,12 +73,11 @@ public class NotDuplicatedOnInsertOrUpdate implements INotDuplicatedField{
 		       				       		
 		       		if (check) {
 		       			
-		       			String key=notDuplicated.message();
 		       			fieldName=FieldProperties.getMessage(field, tableName, fieldName);
 		       			
 		       			ex.addFieldError(field.getName(), 
-		       					PropertiesLoad.getProperty(key,
-		       							new String[] {fieldName}));
+		       					"No se puede duplicar el campo: "+fieldName
+		       					);
 		       			
 		       			auxiliar=true;
 		       		}	       			       			       		
