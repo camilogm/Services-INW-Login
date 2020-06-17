@@ -57,24 +57,34 @@ public class MySqlConnection  implements DataBaseConnection,AutoCloseable{
 		path += "\\src\\main\\resources\\database.properties";
 		Properties properties = new Properties();
 		try {
-			properties.load(new FileReader(path));
-			String host = (String) properties.get("host");
-			String user = (String) properties.get("user");
-			String password = (String) properties.get("password");
-			String database = (String) properties.get("database");
-			String extraParameters = (String) properties.get("extra.parameters");
-			
-			String url = host+"/"+database+"?"+"user="+user+"&"+"password="+password+"&"+extraParameters;
+//			properties.load(new FileReader(path));
+//			String host = (String) properties.get("host");
+//			String user = (String) properties.get("user");
+//			String password = (String) properties.get("password");
+//			String database = (String) properties.get("database");
+//			String extraParameters = (String) properties.get("extra.parameters");
+//			
+//			String url = host+"/"+database+"?"+"user="+user+"&"+"password="+password+"&"+extraParameters;
+//			this.connectionMysql = DriverManager.getConnection(url);
+		
+			String url ="jdbc:mysql://blhukvcuiurjxgkfeise-mysql.services.clever-cloud.com/blhukvcuiurjxgkfeise?user=uhafqkblamf2lqpl&password=A4B2zjc1T52toESVq6lf";
 			this.connectionMysql = DriverManager.getConnection(url);
+					
+			
 			logger.info("Conexion abierta" );
 			
 			
-		} catch (IOException | SQLException e) {
+		} catch (SQLException e) {
 			
 			logger.error(e.getMessage());
 			e.fillInStackTrace();
 			return;
 		}
+		/*
+		 * catch (IOException e) {
+		 * 
+		 * }
+		 */
 		
 	}
 	
