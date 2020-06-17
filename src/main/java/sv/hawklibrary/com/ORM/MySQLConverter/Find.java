@@ -66,7 +66,8 @@ public class Find extends JsonConvert implements IFind {
 	}
 	
 	
-	private Object convertToObject(Object object,String query) throws NullPointerException, SQLException, FileNotFoundException, IOException {
+	private Object convertToObject(Object object,String query) throws NullPointerException, SQLException, FileNotFoundException, IOException, 
+	NotFoundException {
 	
 		
 		Object objectFind=null;
@@ -76,7 +77,7 @@ public class Find extends JsonConvert implements IFind {
 		logger.info(query);
 		if (jsonObject==null){
 			String message;
-			message="No se encontró lo que buscaba";
+			message="No se encontró lo que buscaba en los registros";
 			NotFoundException ex=new NotFoundException(message+" "+TablesDataProperties.getTableName(object));
 			throw ex;
 		}
