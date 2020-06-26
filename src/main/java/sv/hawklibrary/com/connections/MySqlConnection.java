@@ -1,13 +1,10 @@
 package sv.hawklibrary.com.connections;
 
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Properties;
 
 import sv.hawkframework.factorys.LoggerFactory;
 import sv.hawkframework.loggers.Logger;
@@ -53,20 +50,7 @@ public class MySqlConnection  implements DataBaseConnection,AutoCloseable{
 	
 	private void openConnection() {
 		
-		String path = System.getProperty("user.dir");
-		path += "\\src\\main\\resources\\database.properties";
-		Properties properties = new Properties();
 		try {
-//			properties.load(new FileReader(path));
-//			String host = (String) properties.get("host");
-//			String user = (String) properties.get("user");
-//			String password = (String) properties.get("password");
-//			String database = (String) properties.get("database");
-//			String extraParameters = (String) properties.get("extra.parameters");
-//			
-//			String url = host+"/"+database+"?"+"user="+user+"&"+"password="+password+"&"+extraParameters;
-//			this.connectionMysql = DriverManager.getConnection(url);
-		
 			String url ="jdbc:mysql://blhukvcuiurjxgkfeise-mysql.services.clever-cloud.com/blhukvcuiurjxgkfeise?user=uhafqkblamf2lqpl&password=A4B2zjc1T52toESVq6lf";
 			this.connectionMysql = DriverManager.getConnection(url);
 					
@@ -80,12 +64,6 @@ public class MySqlConnection  implements DataBaseConnection,AutoCloseable{
 			e.fillInStackTrace();
 			return;
 		}
-		/*
-		 * catch (IOException e) {
-		 * 
-		 * }
-		 */
-		
 	}
 	
 

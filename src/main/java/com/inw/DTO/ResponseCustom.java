@@ -2,7 +2,7 @@ package com.inw.DTO;
 
 import org.springframework.http.HttpStatus;
 
-public class Response {
+public class ResponseCustom {
 	
 	public static ResponseDTO ok(Object data) {		
 		return new ResponseDTO(data);
@@ -10,6 +10,9 @@ public class Response {
 	
 	public static ResponseDTO bad_request(Object error) { 
 		return new ResponseDTO(error, HttpStatus.BAD_REQUEST.value());
+	}
+	public static ResponseDTO internal_error(Object error) {
+		return new ResponseDTO(error,HttpStatus.INTERNAL_SERVER_ERROR.value());
 	}
 	
 }

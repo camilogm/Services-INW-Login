@@ -20,12 +20,15 @@ public class User {
 	@SerializedName("rol_id")
 	private Integer rolId;
 	private String rol;
+	@SerializedName("phone")
+	private String phone;
 	
 	public User() {
 		
 	}
 
-	public User(Integer id,String email, String password, String name, String lastName, String rol) {
+	public User(Integer id,String email, String password, String name, String lastName, 
+			String rol,String phone) {
 		
 		this.id = id;
 		this.email = email;
@@ -33,6 +36,7 @@ public class User {
 		this.name = name;
 		this.lastName = lastName;
 		this.rol = rol;
+		this.phone = phone;
 	}
 
 	public Integer getId() {
@@ -90,6 +94,15 @@ public class User {
 	public void setRolId(Integer rol_id) {
 		this.rolId = rol_id;
 	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	
 
 	
 	

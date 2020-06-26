@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.List;
 
-import com.inw.DTO.Response;
+import com.inw.DTO.ResponseCustom;
 
 @RestControllerAdvice
 @Order(1)
@@ -34,7 +34,7 @@ public class MethodArgumentNotValidExceptionHandle {
       
         
         return new ResponseEntity<>(
-        		Response.bad_request(error)
+        		ResponseCustom.bad_request(error)
         		,status);
     }
 

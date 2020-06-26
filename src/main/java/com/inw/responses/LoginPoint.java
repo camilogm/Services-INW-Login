@@ -17,7 +17,7 @@ import com.inw.requests.LoginModel;
 import com.inw.util.*;
 import com.inw.services.MyUserDetailsService;
 import com.inw.DTO.LoginDTO;
-import com.inw.DTO.Response;
+import com.inw.DTO.ResponseCustom;
 import com.inw.model.User;
 
 @RestController
@@ -51,7 +51,7 @@ public class LoginPoint {
 		final String jwt = jwtUtil.generateToken(userDetails);
 		LoginDTO login = new LoginDTO(jwt,user.getRol(),user.getName(),user.getLastName());		
 		return ResponseEntity.ok(
-				Response.ok(login)
+				ResponseCustom.ok(login)
 				);	
 		
 	}

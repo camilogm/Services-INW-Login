@@ -22,7 +22,7 @@ public class ArrayUsersFont implements GetUser {
 			
 			if (userName.equals(email[i])) {
 				return new User(IDs[i],email[i],password[i]
-						, names[i],lastNames[i], rols[i]
+						, names[i],lastNames[i], rols[i],null
 						);
 			}			
 		}

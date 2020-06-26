@@ -11,7 +11,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.inw.DTO.Response;
+import com.inw.DTO.ResponseCustom;
 
 @RestControllerAdvice
 @Order(1)
@@ -26,7 +26,7 @@ public class BadCredentialsHandle  {
 		
     	error.setError("Usuario o contraseña incorrectos",null);
         return new ResponseEntity<>(
-        		Response.bad_request(error)
+        		ResponseCustom.bad_request(error)
         		,HttpStatus.BAD_REQUEST);	
 	}
 }
