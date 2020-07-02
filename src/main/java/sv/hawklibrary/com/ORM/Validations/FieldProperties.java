@@ -10,14 +10,9 @@ public class FieldProperties {
 
 	public static final String getMessage(Field field,String tableName,String fieldName) throws FileNotFoundException, IOException {
 		
-		FieldName fieldNameAnn=(FieldName) field.getAnnotation(FieldName.class);  	     
-		String fieldName1=fieldNameAnn==null ? 
-					tableName+"."+fieldName :
-						tableName+"."+fieldNameAnn.name();		      	
+		
 		fieldName="No se puede duplicar "+fieldName;
-			
-		if (fieldName==null)
-				fieldName=field.getName();
+		
 		return fieldName;
 	}
 }

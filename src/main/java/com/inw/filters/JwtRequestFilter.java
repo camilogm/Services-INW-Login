@@ -1,6 +1,7 @@
 package com.inw.filters;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -16,6 +17,9 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.inw.model.DatabaseUsersFont;
+import com.inw.model.GetUser;
+import com.inw.model.User;
 import com.inw.responses.exceptions.Error;
 import com.inw.serializable.GetStringfy;
 import com.inw.serializable.GetStringfyFromGson;
@@ -32,7 +36,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
 	  	@Autowired
 	  	private MyUserDetailsService userDetailsService;
+	  	@Autowired
+	  	private UserDetailsAuthentication userDetails;
 
+	  	private GetUser getUser = new DatabaseUsersFont();
+	  	
 	   	@Autowired
 	    private JwtUtil jwtUtil;
 	   	
@@ -77,8 +85,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	 	                
 	 	                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 	 	                
-	 	               chain.doFilter(request, response);
-	 	               return;
+	 	                User user = getUser.execute(userName);
+	 	                
+	 	                if (user!=null) { 
+	 	                	
+	 	                	 userDetails.setUser(user);
+	 	                	 chain.doFilter(request, response);	 
+	 	                	 return;
+	 	                	
+	 	                }	 	             
 	 	            }
 	 	        }
 	        	
