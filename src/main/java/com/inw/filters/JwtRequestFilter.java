@@ -1,7 +1,6 @@
 package com.inw.filters;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -36,8 +35,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
 	  	@Autowired
 	  	private MyUserDetailsService userDetailsService;
-	  	@Autowired
-	  	private UserDetailsAuthentication userDetails;
 
 	  	private GetUser getUser = new DatabaseUsersFont();
 	  	
